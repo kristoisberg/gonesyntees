@@ -26,36 +26,36 @@ func TestEmptyText(t *testing.T) {
 	_, err := Request("", Tõnu, 0)
 
 	if err == nil {
-		t.Error(err.Error())
+		t.Fail()
 	}
 }
 
 // TestInvalidVoice tests if the request fails with an invalid voice ID
 func TestInvalidVoice(t *testing.T) {
-	_, err := Request("", 4, 0)
+	_, err := Request("this is a test", 4, 0)
 
 	if err == nil {
-		t.Error(err.Error())
+		t.Fail()
 	}
 
-	_, err = Request("", -1, 0)
+	_, err = Request("this is a test", -1, 0)
 
 	if err == nil {
-		t.Error(err.Error())
+		t.Fail()
 	}
 }
 
 // TestInvalidSpeed tests if the request fails with an invalid speed
 func TestInvalidSpeed(t *testing.T) {
-	_, err := Request("", Tõnu, 10)
+	_, err := Request("this is a test", Tõnu, 10)
 
 	if err == nil {
-		t.Error(err.Error())
+		t.Fail()
 	}
 
-	_, err = Request("", Tõnu, -10)
+	_, err = Request("this is a test", Tõnu, -10)
 
 	if err == nil {
-		t.Error(err.Error())
+		t.Fail()
 	}
 }
