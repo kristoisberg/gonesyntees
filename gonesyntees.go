@@ -5,7 +5,9 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
+	"net/url"
 	"strings"
 )
 
@@ -43,7 +45,10 @@ func Request(text string, voice Voice, speed int) (*Response, error) {
 		return nil, errors.New("speed must be in the range of -9 .. 9")
 	}
 
-	url := fmt.Sprintf("http://teenus.eki.ee/konesyntees?haal=%d&kiirus=%d&tekst=%s", voice, speed, strings.Replace(text, " ", "%20", -1))
+	url := fmt.Sprintf("http://teenus.eki.ee/konesyntees?haal=%d&kiirus=%d&tekst=%s", voice, speed, url.QueryEscape(text))
+
+	log.Printf(url)
+
 	httpResponse, err := http.Get(url)
 
 	if err != nil {
