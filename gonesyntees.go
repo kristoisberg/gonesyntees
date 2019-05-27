@@ -45,14 +45,13 @@ func Request(text string, voice Voice, speed int) (*Response, error) {
 	}
 
 	url := fmt.Sprintf("http://teenus.eki.ee/konesyntees?haal=%d&kiirus=%d&tekst=%s", voice, speed, url.QueryEscape(text))
-	httpResponse, err := http.Get(url)
 
+	httpResponse, err := http.Get(url)
 	if err != nil {
 		return nil, err
 	}
 
 	data, err := ioutil.ReadAll(httpResponse.Body)
-
 	if err != nil {
 		return nil, err
 	}
@@ -61,9 +60,7 @@ func Request(text string, voice Voice, speed int) (*Response, error) {
 
 	var urls map[string]string
 
-	err = decoder.Decode(&urls)
-
-	if err != nil {
+	if err := decoder.Decode(&urls); err != nil {
 		return nil, err
 	}
 
